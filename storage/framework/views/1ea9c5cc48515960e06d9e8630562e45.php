@@ -16,47 +16,49 @@
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            @guest
-                                @if (Route::has('login'))
+                            <?php if(auth()->guard()->guest()): ?>
+                                <?php if(Route::has('login')): ?>
                                     <li class="nav-item" id="loginButton">
-                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                        <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
                                     </li>
-                                @endif
+                                <?php endif; ?>
 
-                                @if (Route::has('register'))
+                                <?php if(Route::has('register')): ?>
                                     <li class="nav-item" id="registerButton">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                        <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
                                     </li>
-                                @endif
-                            @else
+                                <?php endif; ?>
+                            <?php else: ?>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false" v-pre>
-                                        {{ Auth::user()->name }}
+                                        <?php echo e(Auth::user()->name); ?>
+
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="nav-link" href="{{ route('logout') }}"
+                                    <a class="nav-link" href="<?php echo e(route('logout')); ?>"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        <?php echo e(__('Logout')); ?>
+
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
+                                    <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+                                        <?php echo csrf_field(); ?>
                                     </form>
                                 </li>
-                            @endguest
+                            <?php endif; ?>
                             <!-- Place this tag where you want the button to render. -->
                             <li class="nav-item lh-1 me-3">
-                                <form id="langForm" method="post" action="{{ url('change-lang') }}">
-                                    @csrf
+                                <form id="langForm" method="post" action="<?php echo e(url('change-lang')); ?>">
+                                    <?php echo csrf_field(); ?>
                                     <select class="form-control" name="lang" id="lang" onchange="this.form.submit()">
-                                        <option value="en" {{ session('lang') == 'en' ? 'selected' : '' }}>{{ __('English') }}</option>
-                                        <option value="fa" {{ session('lang') == 'fa' ? 'selected' : '' }}>{{ __('Farsi') }}</option>
-                                        <option value="ur" {{ session('lang') == 'ur' ? 'selected' : '' }}>{{ __('Urdu') }}</option>
-                                        <option value="ar" {{ session('lang') == 'ar' ? 'selected' : '' }}>{{ __('Arabic') }}</option>
-                                        <option value="hi" {{ session('lang') == 'hi' ? 'selected' : '' }}>{{ __('Hindi') }}</option>
+                                        <option value="en" <?php echo e(session('lang') == 'en' ? 'selected' : ''); ?>><?php echo e(__('English')); ?></option>
+                                        <option value="fa" <?php echo e(session('lang') == 'fa' ? 'selected' : ''); ?>><?php echo e(__('Farsi')); ?></option>
+                                        <option value="ur" <?php echo e(session('lang') == 'ur' ? 'selected' : ''); ?>><?php echo e(__('Urdu')); ?></option>
+                                        <option value="ar" <?php echo e(session('lang') == 'ar' ? 'selected' : ''); ?>><?php echo e(__('Arabic')); ?></option>
+                                        <option value="hi" <?php echo e(session('lang') == 'hi' ? 'selected' : ''); ?>><?php echo e(__('Hindi')); ?></option>
                                     </select>
                                 </form>
 
@@ -68,7 +70,7 @@
                             </li>
                             <li lass="nav-item lh-1 me-3" id="youtubeLink">
                                 <a href="https://www.facebook.com/sadhin555" target="_blank">
-                                    <img src="{{ URL::asset('images/youtube-svgrepo-com.svg') }}" alt="YouTube Icon" class="youtube-icon">
+                                    <img src="<?php echo e(URL::asset('images/youtube-svgrepo-com.svg')); ?>" alt="YouTube Icon" class="youtube-icon">
                                 </a>
                             </li>
 
@@ -134,3 +136,4 @@
                         </ul>
                     </div>
                 </nav>
+<?php /**PATH /run/media/root/WORKING-FILES/4_Need_GitHub_Upload_@sadhin-dev/2_Done_GitHub-Upload_Project_2025/LaravelProjects/resources/views/layouts/navbar.blade.php ENDPATH**/ ?>
